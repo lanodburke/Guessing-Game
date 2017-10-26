@@ -11,14 +11,15 @@
   </head>
   <body>
     <div class="container">
-        <h2>{{.Message}}</h2>
-      <form class="form-inline">
+      <h2>{{.Title}}</h2>
+      <h5>Your guess: {{.Guess}}</h4>
+      <form action="/guess" method="GET" class="form-inline">
         <div class="form-group">
-            <label for="guessInput" class="sr-only">Guess</label>
-            <input type="number" class="form-control" id="guessInput" placeholder="Guess">
+            <input type="number" name="guess" class="form-control" placeholder="Guess">
         </div>
-        <button type="submit" class="btn btn-primary">Guess</button>
+        <input type="submit" class="btn btn-primary" value="Guess">
         </form>
+        
     </div>
 
     <!-- Optional JavaScript -->

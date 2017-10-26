@@ -9,6 +9,8 @@ import (
 )
 
 type msg struct {
+	Title string
+	Guess int
 	Message string
 }
 
@@ -24,22 +26,28 @@ func requestHandler(w http.ResponseWriter, r *http.Request) {
 func guessHandler(w http.ResponseWriter, r *http.Request) {
 	myrand := xrand(1, 20)
 
-	mycookie, err := r.Cookie("target")
-	if(err == nil) {
-		target, _ := strconv.Atoi(mycookie.Value)
-
-		if target == 0 {
-			target = myrand
+	cookie, err := r.Cookie("target")
+	if err != nil {	
+		cookie = &http.Cookie{
+			Name: "target",
+			Value: strconv.Itoa(myrand),
+			Expires: time.Now().Add(72 * time.Hour),
 		}
-	}
 
-	http.SetCookie(w, mycookie)
+		http.SetCookie(w, cookie)
+	}		
 
-	message := &msg{Message: "Guess a number between 1 and 20"}
+	guess, _ := strconv.Atoi(r.FormValue("guess"))
+
+	messageStruct := &msg{Title: "Guess a number between 1 and 20", Guess: guess}
+
+	target, _ := strconv.Atoi(cookie.Value)
+
+	if target == guess {}
 	
 	s, _ := template.ParseFiles("guess.tmpl")
 
-	s.Execute(w, message)
+	s.Execute(w, messageStruct)
 }
 
 func main() {
