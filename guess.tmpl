@@ -12,14 +12,17 @@
   <body>
     <div class="container">
       <h2>{{.Title}}</h2>
-      <h5>Your guess: {{.Guess}}</h4>
+
       <form action="/guess" method="GET" class="form-inline">
         <div class="form-group">
             <input type="number" name="guess" class="form-control" placeholder="Guess">
+            <input type="submit" class="btn btn-primary" value="Guess">
         </div>
-        <input type="submit" class="btn btn-primary" value="Guess">
-        </form>
-        
+      </form>
+    
+      <p>Your guess: {{.Guess}}</p>
+      <p>{{.Message}}</p>
+
     </div>
 
     <!-- Optional JavaScript -->

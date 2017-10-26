@@ -39,15 +39,30 @@ func guessHandler(w http.ResponseWriter, r *http.Request) {
 
 	guess, _ := strconv.Atoi(r.FormValue("guess"))
 
-	messageStruct := &msg{Title: "Guess a number between 1 and 20", Guess: guess}
+	message_t := &msg{Title: "Guess a number between 1 and 20", Guess: guess}
 
 	target, _ := strconv.Atoi(cookie.Value)
 
-	if target == guess {}
+	if target == guess {
+		// correct
+		cookie = &http.Cookie{
+			Name: "target",
+			Value: strconv.Itoa(myrand),
+			Expires: time.Now().Add(72 * time.Hour),
+		}
+
+		http.SetCookie(w, cookie)
+
+		message_t.Message = "Your guess was Correct, Congratulations!"
+	} else if guess < target {
+		message_t.Message = "Your guess was too low, try again!"
+	} else if guess > target {
+		message_t.Message = "Your guess was too high, try again!"
+	}
 	
 	s, _ := template.ParseFiles("guess.tmpl")
 
-	s.Execute(w, messageStruct)
+	s.Execute(w, message_t)
 }
 
 func main() {
