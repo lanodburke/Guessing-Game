@@ -12,6 +12,7 @@ type msg struct {
 	Title string
 	Guess int
 	Message string
+	HasWon bool
 }
 
 func xrand(min, max int) int {
@@ -39,7 +40,7 @@ func guessHandler(w http.ResponseWriter, r *http.Request) {
 
 	guess, _ := strconv.Atoi(r.FormValue("guess"))
 
-	message_t := &msg{Title: "Guess a number between 1 and 20", Guess: guess}
+	message_t := &msg{Title: "Guess a number between 1 and 20", Guess: guess, HasWon: false}
 
 	target, _ := strconv.Atoi(cookie.Value)
 
@@ -54,6 +55,7 @@ func guessHandler(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(w, cookie)
 
 		message_t.Message = "Your guess was Correct, Congratulations!"
+		message_t.HasWon = true
 	} else if guess < target {
 		message_t.Message = "Your guess was too low, try again!"
 	} else if guess > target {

@@ -19,9 +19,14 @@
             <input type="submit" class="btn btn-primary" value="Guess">
         </div>
       </form>
-    
-      <p>Your guess: {{.Guess}}</p>
-      <p>{{.Message}}</p>
+      {{if .Guess}}
+        <p>Your guess: {{.Guess}}</p>
+        <p>{{.Message}}</p>
+      {{end}}
+
+      {{if .HasWon}}
+        <a href="/guess">New Game</a>
+      {{end}}
 
     </div>
 
