@@ -8,5 +8,9 @@ cd Guessing-Game
 go build webApp.go
 webApp.exe
 ```
+Then in your browser url search bar type:
+```
+localhost:8080
+```
 
 
