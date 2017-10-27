@@ -1,5 +1,15 @@
 package main
 
+// Donal Burke - G00337729
+/* sources 
+---------------
+https://golang.org/pkg/text/template/
+https://golang.org/src/net/http/cookie.go
+https://golang.org/doc/articles/wiki/
+https://golang.org/pkg/html/template/
+---------------
+*/
+
 import (
 	"net/http"
 	"html/template"
